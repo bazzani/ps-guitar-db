@@ -5,6 +5,7 @@ delete location;
 
 --alter table manufacturer add column active boolean not null;
 
+--insert into location (id, country, state) values (0, 'United States', 'Alabama');
 insert into location (id, country, state) values (1, 'United States', 'Alabama');
 insert into location (id, country, state) values (2, 'United States', 'Alaska');
 insert into location (id, country, state) values (3, 'United States', 'Arizona');

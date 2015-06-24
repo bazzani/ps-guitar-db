@@ -1,8 +1,6 @@
 package com.guitar.db;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotSame;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 import java.util.List;
 
@@ -17,13 +15,13 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.guitar.db.model.Location;
-import com.guitar.db.repository.LocationJpaRepsoiory;
+import com.guitar.db.repository.LocationJpaRepository;
 
 @ContextConfiguration(locations={"classpath:com/guitar/db/applicationTests-context.xml"})
 @RunWith(SpringJUnit4ClassRunner.class)
 public class LocationPersistenceTests {
 	@Autowired
-	private LocationJpaRepsoiory locationJpaRepository;
+	private LocationJpaRepository locationJpaRepository;
 
 	@PersistenceContext
 	private EntityManager entityManager;
@@ -79,6 +77,19 @@ public class LocationPersistenceTests {
 		locs.forEach((location) -> {
 			System.out.println(location.getState());
 		});
+	}
+	
+	@Test
+	public void testFindFirstTopDistinct() throws Exception {
+		Location loc = locationJpaRepository.findFirstByStateIgnoreCaseStartingWith("a");
+		assertEquals("Alabama", loc.getState());
+		
+		List<Location> locs = locationJpaRepository.findTop5ByStateIgnoreCaseStartingWith("New");
+		assertEquals(4, locs.size());
+		
+//		need to implement Distinct DSL Query
+//		locs = locationJpaRepository.findDistinctLocationStateByStateIgnoreCaseStartingWith("Alabama");
+//		assertEquals(1, locs.size());
 	}
 
 	@Test

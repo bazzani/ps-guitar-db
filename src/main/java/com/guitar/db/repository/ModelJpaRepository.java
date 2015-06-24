@@ -11,4 +11,5 @@ import com.guitar.db.model.Model;
 @Repository
 public interface ModelJpaRepository extends JpaRepository<Model, Long> {
 	List<Model> findByPriceGreaterThanEqualAndPriceLessThanEqual(BigDecimal lowest, BigDecimal highest);
+	List<Model> findByModelTypeNameIn(List<String> types);
 }

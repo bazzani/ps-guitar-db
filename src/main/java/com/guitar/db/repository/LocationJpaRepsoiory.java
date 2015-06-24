@@ -10,6 +10,8 @@ import com.guitar.db.model.Location;
 @Repository
 public interface LocationJpaRepsoiory extends JpaRepository<Location, Long> {
 	List<Location> findByStateLike(String stateName);
+	List<Location> findByStateNotLike(String stateName);
+	
 	List<Location> findByStateIsOrCountryEquals(String value, String value2);
 	List<Location> findByStateNot(String state);
 }

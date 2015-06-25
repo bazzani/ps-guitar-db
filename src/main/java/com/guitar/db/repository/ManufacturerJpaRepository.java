@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.guitar.db.model.Manufacturer;
@@ -13,4 +14,7 @@ public interface ManufacturerJpaRepository extends JpaRepository<Manufacturer, L
 	List<Manufacturer> findByFoundedDateBefore(Date date);
 	List<Manufacturer> findByActiveTrue();
 	List<Manufacturer> findByActiveFalse();
+
+	@Query(name="Manufacturer.getAllThatSellAcoustics")
+	List<Manufacturer> getAllThatSellAcoustics(String name);
 }
